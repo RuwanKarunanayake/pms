@@ -22,12 +22,25 @@
             <column name="login" type="varchar(50)">
                 <constraints unique="true" nullable="false"/>
             </column>
+            <column name="reg_id" type="varchar(7)">
+                <constraints nullable="false" />
+             </column>
+            <column name="dob" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="address" type="varchar(300)">
+            <column name="gender" type="bit">
+                <constraints nullable="false" />
+            </column>
+            <column name="telephone" type="varchar(12)"/>
+            <column name="mobile" type="varchar(12)"/>
             <column name="password_hash" type="varchar(60)"/>
             <column name="first_name" type="varchar(50)"/>
             <column name="last_name" type="varchar(50)"/>
             <column name="email" type="varchar(100)">
                 <constraints unique="true" nullable="true"/>
             </column>
+
             <column name="image_url" type="varchar(256)"/>
             <column name="activated" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />

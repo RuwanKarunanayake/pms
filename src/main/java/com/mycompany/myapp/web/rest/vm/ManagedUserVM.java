@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest.vm;
 import com.mycompany.myapp.service.dto.UserDTO;
 import javax.validation.constraints.Size;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
@@ -23,11 +24,11 @@ public class ManagedUserVM extends UserDTO {
     }
 
     public ManagedUserVM(Long id, String login, String password, String firstName, String lastName,
-                         String email, boolean activated, String imageUrl, String langKey,
+                         String email, String regId, LocalDate dob, String address, boolean gender, String telephone, String mobile, boolean activated, String imageUrl, String langKey,
                          String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
-                        Set<String> authorities) {
+                         Set<String> authorities) {
 
-        super(id, login, firstName, lastName, email, activated, imageUrl, langKey,
+        super(id, login, firstName, lastName, email, regId, dob, address, gender, telephone, mobile, activated, imageUrl, langKey,
             createdBy, createdDate, lastModifiedBy, lastModifiedDate,  authorities);
 
         this.password = password;

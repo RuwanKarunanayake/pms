@@ -7,7 +7,9 @@ import com.mycompany.myapp.domain.User;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,6 +35,23 @@ public class UserDTO {
     @Size(min = 5, max = 100)
     private String email;
 
+    @Size(min =4,max =7)
+    private String regId;
+
+    private LocalDate dob;
+
+    @Size(min = 5, max = 300)
+    private String address;
+
+    @Column(name = "gender")
+    private Boolean gender;
+
+    @Size(min = 10, max = 12)
+    private String telephone;
+
+    @Size(min = 10, max = 12)
+    private String mobile;
+
     @Size(max = 256)
     private String imageUrl;
 
@@ -57,14 +76,14 @@ public class UserDTO {
 
     public UserDTO(User user) {
         this(user.getId(), user.getLogin(), user.getFirstName(), user.getLastName(),
-            user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
+            user.getEmail(),user.getRegId(), user.getDob(),user.getAddress(),user.getGender(),user.getTelephone(),user.getMobile(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()));
     }
 
     public UserDTO(Long id, String login, String firstName, String lastName,
-        String email, boolean activated, String imageUrl, String langKey,
+        String email,String regId, LocalDate dob, String address, boolean gender, String telephone, String mobile, boolean activated, String imageUrl, String langKey,
         String createdBy, ZonedDateTime createdDate, String lastModifiedBy, ZonedDateTime lastModifiedDate,
         Set<String> authorities) {
 
@@ -73,6 +92,12 @@ public class UserDTO {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.regId = regId;
+        this.dob = dob;
+        this.address = address;
+        this.gender = gender;
+        this.telephone =telephone;
+        this.mobile =mobile;
         this.activated = activated;
         this.imageUrl = imageUrl;
         this.langKey = langKey;
@@ -109,6 +134,54 @@ public class UserDTO {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getRegId() {
+        return regId;
+    }
+
+    public void setRegId(String regId) {
+        this.regId = regId;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getImageUrl() {
@@ -154,6 +227,12 @@ public class UserDTO {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", regId='" + regId + '\'' +
+            ", dob='" + dob + '\'' +
+            ", address='" + address + '\'' +
+            ", gender='" + gender + '\'' +
+            ", telephone='" + telephone + '\'' +
+            ", mobile='" + mobile + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +

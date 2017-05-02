@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -56,6 +58,32 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 5, max = 100)
     @Column(length = 100, unique = true)
     private String email;
+
+    @NotNull
+    @Size(min =4,max =7)
+    @Column(name = "reg_id", length=7)
+    private String regId;
+
+    @NotNull
+    @Column(name = "dob", nullable = false)
+    private LocalDate dob;
+
+    @Size(min = 5, max = 300)
+    @Column(name = "address",length = 300)
+    private String address;
+
+    @NotNull
+    @Column(name = "gender")
+    private boolean gender;
+
+
+    @Size(min = 10, max = 12)
+    @Column(name = "telephone" ,length = 12)
+    private String telephone;
+
+    @Size(min = 10, max = 12)
+    @Column(name = "mobile" ,length = 12)
+    private String mobile;
 
     @NotNull
     @Column(nullable = false)
@@ -143,6 +171,54 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRegId() {
+        return regId;
+    }
+
+    public void setRegId(String regId) {
+        this.regId = regId;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String adress) {
+        this.address = adress;
+    }
+
+    public Boolean getGender() {
+        return gender;
+    }
+
+    public void setGender(Boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getImageUrl() {
@@ -235,6 +311,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
+            ", regId='" + regId + '\'' +
+            ", dob='" + dob + '\'' +
+            ", address='" + address + '\'' +
+            ", gender='" + gender + '\'' +
+            ", telephone='" + telephone + '\'' +
+            ", mobile='" + mobile + '\'' +
             ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +

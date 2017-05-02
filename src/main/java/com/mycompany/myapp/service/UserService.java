@@ -86,8 +86,8 @@ public class UserService {
             });
     }
 
-    public User createUser(String login, String password, String firstName, String lastName, String email,
-        String imageUrl, String langKey) {
+    public User createUser(String login, String password, String firstName, String lastName, String email, String reg_id,LocalDate dob,String address,
+        Boolean gender,String telephone,String mobile,String imageUrl, String langKey) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -99,6 +99,12 @@ public class UserService {
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
         newUser.setEmail(email);
+        newUser.setRegId(reg_id);
+        newUser.setAddress(address);
+        newUser.setDob(dob);
+        newUser.setGender(gender);
+        newUser.setTelephone(telephone);
+        newUser.setMobile(mobile);
         newUser.setImageUrl(imageUrl);
         newUser.setLangKey(langKey);
         // new user is not active
@@ -118,6 +124,12 @@ public class UserService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
+        user.setRegId(userDTO.getRegId());
+        user.setDob(userDTO.getDob());
+        user.setGender(userDTO.getGender());
+        user.setAddress(userDTO.getAddress());
+        user.setTelephone(userDTO.getTelephone());
+        user.setMobile(userDTO.getMobile());
         user.setImageUrl(userDTO.getImageUrl());
         if (userDTO.getLangKey() == null) {
             user.setLangKey("en"); // default language
@@ -149,11 +161,17 @@ public class UserService {
      * @param email email id of user
      * @param langKey language key
      */
-    public void updateUser(String firstName, String lastName, String email, String langKey) {
+    public void updateUser(String firstName, String lastName, String email,String regId, LocalDate dob, String address, boolean gender, String telephone, String mobile, String langKey) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
+            user.setRegId(regId);
+            user.setDob(dob);
+            user.setAddress(address);
+            user.setGender(gender);
+            user.setTelephone(telephone);
+            user.setMobile(mobile);
             user.setLangKey(langKey);
             log.debug("Changed Information for User: {}", user);
         });
@@ -173,6 +191,12 @@ public class UserService {
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
                 user.setEmail(userDTO.getEmail());
+                user.setRegId(userDTO.getRegId());
+                user.setDob(userDTO.getDob());
+                user.setAddress(userDTO.getAddress());
+                user.setGender(userDTO.getGender());
+                user.setTelephone(userDTO.getTelephone());
+                user.setMobile(userDTO.getMobile());
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
@@ -202,7 +226,7 @@ public class UserService {
         });
     }
 
-    @Transactional(readOnly = true)    
+    @Transactional(readOnly = true)
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
